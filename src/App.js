@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import axios from 'axios';
 
 import Nav from './components/Nav';
+import LoginPage from './components/LoginPage';
 
 function App() {
-  return <Nav />;
+  const [user, setUser] = useState(null);
+
+  const handleLogin = (credentials) => {
+    axios
+      .post('http://localhost:3001/api/users/login', credentials)
+      .then((response) => {
+        setUser(response.data);
+        console.log(response.data);
+      })
+      .catch((err) => console.log('[Error]: ' + err.message));
+  };
+
+  return (
+    <Router>
+      <Nav />
+      <Switch>
+        <Route exact path="/">
+          <h1>Home Page</h1>
+        </Route>
+        <Route exact path="/login">
+          <LoginPage handleLogin={handleLogin} />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
