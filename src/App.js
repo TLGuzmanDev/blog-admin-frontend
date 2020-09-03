@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Nav from './components/Nav';
+
 function App() {
-  return <div>React App</div>;
+  return <Nav />;
 }
 
 export default App;
