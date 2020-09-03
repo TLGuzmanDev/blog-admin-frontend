@@ -13,14 +13,17 @@ function App() {
       .post('http://localhost:3001/api/users/login', credentials)
       .then((response) => {
         setUser(response.data);
-        console.log(response.data);
       })
       .catch((err) => console.log('[Error]: ' + err.message));
   };
 
+  const handleLogout = () => {
+    setUser(null);
+  };
+
   return (
     <Router>
-      <Nav />
+      <Nav user={user} handleLogout={handleLogout} />
       <Switch>
         <Route exact path="/">
           <h1>Home Page</h1>
