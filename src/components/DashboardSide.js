@@ -5,7 +5,7 @@ function DashboardSide({ user }) {
   const { path, url } = useRouteMatch();
 
   return (
-    <ul className="d-flex flex-column list-unstyled text-light h-100">
+    <ul className="d-flex flex-column list-unstyled text-light h-100 m-0">
       <ul className="list-unstyled my-3 px-3">
         <li className="text-secondary text-uppercase mb-1">Core</li>
         <li className="pl-1">
