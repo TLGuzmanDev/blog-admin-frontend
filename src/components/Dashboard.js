@@ -1,17 +1,30 @@
 import React from 'react';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 import DashboardSide from './DashboardSide';
 import DashboardMain from './DashboardMain';
+import CreateBlog from './CreateBlog';
 
 function Dashboard({ user }) {
+  const { path, url } = useRouteMatch();
   return (
     <Row as="main" noGutters className="bg-secondary flex-grow-1">
       <Col xs={2} className="bg-dark border-top border-light">
         <DashboardSide user={user} />
       </Col>
       <Col xs={10} className="bg-light">
-        <DashboardMain user={user} />
+        <Switch>
+          <Route exact path={path}>
+            <DashboardMain user={user} />
+          </Route>
+          <Route exact path="/dashboard/blogs">
+            <h1>Blogs</h1>
+          </Route>
+          <Route exact path="/dashboard/create">
+            <CreateBlog />
+          </Route>
+        </Switch>
       </Col>
     </Row>
   );

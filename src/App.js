@@ -55,7 +55,7 @@ function App() {
         <Route exact path="/login">
           {user ? <Redirect to="/" /> : <LoginPage handleLogin={handleLogin} />}
         </Route>
-        <Route exact path="/dashboard">
+        <Route path="/dashboard">
           {user ? <Dashboard user={user} /> : <Redirect to="/login" />}
         </Route>
       </Switch>

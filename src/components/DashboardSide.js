@@ -1,16 +1,25 @@
 import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 function DashboardSide({ user }) {
+  const { path, url } = useRouteMatch();
+
   return (
     <ul className="d-flex flex-column list-unstyled text-light h-100">
       <ul className="list-unstyled my-3 px-3">
         <li className="text-secondary text-uppercase mb-1">Core</li>
-        <li className="pl-1">Dashboard</li>
-        <li className="pl-1">Blogs</li>
+        <li className="pl-1">
+          <Link to={`${url}`}>Dashboard</Link>
+        </li>
+        <li className="pl-1">
+          <Link to={`${url}/blogs`}>Blogs</Link>
+        </li>
       </ul>
       <ul className="list-unstyled my-3 px-3">
         <li className="text-secondary text-uppercase mb-1">Create</li>
-        <li className="pl-1">Blog</li>
+        <li className="pl-1">
+          <Link to={`${url}/create`}>Blog</Link>
+        </li>
       </ul>
       <ul className="list-unstyled my-3 px-3">
         <li className="text-secondary text-uppercase mb-1">Edit</li>
