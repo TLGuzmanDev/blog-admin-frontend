@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from 'react-router-dom';
 import axios from 'axios';
@@ -49,7 +48,7 @@ function App() {
       <Switch>
         <Route exact path="/">
           <div className="bg-light flex-grow-1">
-            <Link to="/dashboard">Dashboard</Link>
+            {user ? <Redirect to="/dashboard" /> : <h1>Homepage</h1>}
           </div>
         </Route>
         <Route exact path="/login">
