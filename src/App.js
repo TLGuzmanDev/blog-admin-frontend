@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 import axios from 'axios';
 
 import Nav from './components/Nav';
@@ -7,6 +13,21 @@ import LoginPage from './components/LoginPage';
 
 function App() {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem('user')) || null;
+    if (localUser) {
+      setUser(localUser);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   const handleLogin = (credentials) => {
     axios
@@ -26,10 +47,13 @@ function App() {
       <Nav user={user} handleLogout={handleLogout} />
       <Switch>
         <Route exact path="/">
-          <h1>Home Page</h1>
+          <>
+            <h1>Home Page</h1>
+            {user && <p className="text-capitalize">Hello {user.name}</p>}
+          </>
         </Route>
         <Route exact path="/login">
-          <LoginPage handleLogin={handleLogin} />
+          {user ? <Redirect to="/" /> : <LoginPage handleLogin={handleLogin} />}
         </Route>
       </Switch>
     </Router>

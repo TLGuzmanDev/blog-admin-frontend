@@ -19,8 +19,8 @@ function Nav({ user, handleLogout }) {
           </Button>
         ) : (
           <>
-            <Navbar.Text className="mr-2">
-              Logged in as: {user.email}
+            <Navbar.Text className="text-capitalize mr-2">
+              Logged in as: {user.name}
             </Navbar.Text>
             <Button variant="outline-light" onClick={handleLogout}>
               Logout
