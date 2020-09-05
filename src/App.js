@@ -10,6 +10,7 @@ import axios from 'axios';
 
 import Nav from './components/Nav';
 import LoginPage from './components/LoginPage';
+import Dashboard from './components/Dashboard';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -47,13 +48,15 @@ function App() {
       <Nav user={user} handleLogout={handleLogout} />
       <Switch>
         <Route exact path="/">
-          <>
-            <h1>Home Page</h1>
-            {user && <p className="text-capitalize">Hello {user.name}</p>}
-          </>
+          <div className="bg-light flex-grow-1">
+            <Link to="/dashboard">Dashboard</Link>
+          </div>
         </Route>
         <Route exact path="/login">
           {user ? <Redirect to="/" /> : <LoginPage handleLogin={handleLogin} />}
+        </Route>
+        <Route exact path="/dashboard">
+          {user ? <Dashboard user={user} /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </Router>
