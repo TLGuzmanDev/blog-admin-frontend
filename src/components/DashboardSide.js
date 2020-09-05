@@ -17,7 +17,7 @@ function DashboardSide({ user }) {
         <li className="pl-1">Blog</li>
         <li className="pl-1">Comment</li>
       </ul>
-      <li className="bg-secondary text-light mt-auto px-3 py-2">
+      <li className="bg-secondary text-light border-top border-light mt-auto px-3 py-2">
         <small>Logged in as:</small>
         <p className="text-capitalize m-0">{user.name}</p>
       </li>
