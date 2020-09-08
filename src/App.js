@@ -7,9 +7,9 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 
-import Nav from './components/Nav';
-import LoginPage from './components/LoginPage';
-import Dashboard from './components/Dashboard';
+import Nav from './components/common/Nav';
+import LoginPage from './components/login/LoginPage';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   const [user, setUser] = useState(null);
