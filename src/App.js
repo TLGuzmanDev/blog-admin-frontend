@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user')) || null;
@@ -24,6 +25,12 @@ function App() {
   useEffect(() => {
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
+      axios
+        .get('http://localhost:3001/api/posts')
+        .then((response) => {
+          setPosts(response.data);
+        })
+        .catch((err) => console.log('[Error]: ' + err.message));
     } else {
       localStorage.removeItem('user');
     }
@@ -55,7 +62,11 @@ function App() {
           {user ? <Redirect to="/" /> : <LoginPage handleLogin={handleLogin} />}
         </Route>
         <Route path="/dashboard">
-          {user ? <Dashboard user={user} /> : <Redirect to="/login" />}
+          {user ? (
+            <Dashboard user={user} posts={posts} />
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
       </Switch>
     </Router>

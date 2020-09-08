@@ -5,9 +5,11 @@ import { Row, Col } from 'react-bootstrap';
 import DashboardSide from './DashboardSide';
 import DashboardMain from './DashboardMain';
 import CreateBlog from './CreateBlog';
+import PostList from './posts/PostList';
+import Post from './posts/Post';
 
-function Dashboard({ user }) {
-  const { path, url } = useRouteMatch();
+function Dashboard({ user, posts }) {
+  const { path } = useRouteMatch();
   return (
     <Row as="main" noGutters className="bg-secondary flex-grow-1">
       <Col xs={2} className="bg-dark border-top border-light">
@@ -18,10 +20,13 @@ function Dashboard({ user }) {
           <Route exact path={path}>
             <DashboardMain user={user} />
           </Route>
-          <Route exact path="/dashboard/blogs">
-            <h1>Blogs</h1>
+          <Route exact path={`${path}/blogs`}>
+            <PostList posts={posts} />
           </Route>
-          <Route exact path="/dashboard/create">
+          <Route path={`${path}/blogs/:postID`}>
+            <Post posts={posts} />
+          </Route>
+          <Route exact path={`${path}/create`}>
             <CreateBlog />
           </Route>
         </Switch>
