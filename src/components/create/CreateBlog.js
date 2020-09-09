@@ -52,13 +52,18 @@ function CreateBlog({ createPost }) {
   return (
     <Container fluid>
       <h1 className="text-center">Create New Blog Post</h1>
+      <hr />
       <Tabs
         id="controlled-tab"
-        className="mt-3"
+        className="nav-justified mt-3"
         activeKey={key}
         onSelect={(key) => setKey(key)}
       >
-        <Tab eventKey="editor" title="Editor">
+        <Tab
+          className="bg-white border border-top-0"
+          eventKey="editor"
+          title="Editor"
+        >
           <Form className="p-3" onSubmit={handleSubmit}>
             <Form.Group controlId="markdownTitle">
               <Form.Label>Title</Form.Label>
@@ -77,22 +82,29 @@ function CreateBlog({ createPost }) {
                 onChange={(event) => setBody(event.target.value)}
               />
             </Form.Group>
-            <div className="float-right">
-              <Button
-                className="mr-1"
-                variant="secondary"
-                type="button"
-                onClick={handleReset}
-              >
-                Reset
-              </Button>
-              <Button variant="primary" type="submit">
-                Create
-              </Button>
+
+            <div className="clearfix">
+              <div className="float-right">
+                <Button
+                  className="mr-1"
+                  variant="secondary"
+                  type="button"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+                <Button variant="primary" type="submit">
+                  Create
+                </Button>
+              </div>
             </div>
           </Form>
         </Tab>
-        <Tab eventKey="preview" title="Preview">
+        <Tab
+          className="bg-white border border-top-0"
+          eventKey="preview"
+          title="Preview"
+        >
           <div>
             <div className="preview bg-white p-2">
               <ReactMarkdown source={`${title}\n${body}`} />
