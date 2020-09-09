@@ -8,7 +8,7 @@ import CreateBlog from '../create/CreateBlog';
 import PostList from '../posts/PostList';
 import Post from '../posts/Post';
 
-function Dashboard({ user, posts }) {
+function Dashboard({ user, posts, createPost }) {
   const { path } = useRouteMatch();
   return (
     <Row as="main" noGutters className="bg-secondary flex-grow-1">
@@ -27,7 +27,7 @@ function Dashboard({ user, posts }) {
             <Post posts={posts} />
           </Route>
           <Route exact path={`${path}/create`}>
-            <CreateBlog />
+            <CreateBlog handleCreatePost={createPost} />
           </Route>
         </Switch>
       </Col>

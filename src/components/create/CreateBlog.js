@@ -4,9 +4,8 @@ import { Container, Form, Tabs, Tab, Button } from 'react-bootstrap';
 
 import './create.css';
 
-const defaultString = `# Aversos bracchiaque inplicat Phrygum cervum
-
-## Et silendo aures
+const defaultTitle = `# Aversos bracchiaque inplicat Phrygum cervum`;
+const defaultBody = `## Et silendo aures
 
 Lorem markdownum et nomen prosit ut Sole tenero *dedit tauri tecta*. Tecta ut
 modo [annos](http://adhuc.io/), furores videt coniuge eadem flammas exstinctaque
@@ -35,25 +34,23 @@ velamina quod monstraverat talia.
 3. Effice ventris qualibet praeterit poteram Troia
 4. Adit lacertos`;
 
-function CreateBlog() {
+function CreateBlog({ createPost }) {
   const [key, setKey] = useState('editor');
-  const [input, setInput] = useState(defaultString);
-
-  const handleInput = (event) => {
-    setInput(event.target.value);
-  };
+  const [body, setBody] = useState(defaultBody);
+  const [title, setTitle] = useState(defaultTitle);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(input);
+    createPost({ title, body });
   };
 
   const handleReset = () => {
-    setInput('');
+    setTitle('');
+    setBody('');
   };
 
   return (
-    <Container>
+    <Container fluid>
       <h1 className="text-center">Create New Blog Post</h1>
       <Tabs
         id="controlled-tab"
@@ -62,13 +59,22 @@ function CreateBlog() {
         onSelect={(key) => setKey(key)}
       >
         <Tab eventKey="editor" title="Editor">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="markdownInput">
+          <Form className="p-3" onSubmit={handleSubmit}>
+            <Form.Group controlId="markdownTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                as="input"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="markdownBody">
+              <Form.Label>Body</Form.Label>
               <Form.Control
                 as="textarea"
                 rows="10"
-                value={input}
-                onChange={handleInput}
+                value={body}
+                onChange={(event) => setBody(event.target.value)}
               />
             </Form.Group>
             <div className="float-right">
@@ -89,7 +95,7 @@ function CreateBlog() {
         <Tab eventKey="preview" title="Preview">
           <div>
             <div className="preview bg-white p-2">
-              <ReactMarkdown source={input} />
+              <ReactMarkdown source={`${title}\n${body}`} />
             </div>
           </div>
         </Tab>
