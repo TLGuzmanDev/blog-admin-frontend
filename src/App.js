@@ -49,6 +49,25 @@ function App() {
     setUser(null);
   };
 
+  const handleCreatePost = async (post) => {
+    const config = {
+      headers: {
+        Authorization: `bearer ${user.token}`,
+      },
+    };
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/api/posts',
+        post,
+        config
+      );
+      console.log(response.data);
+      setPosts([response.data, ...posts]);
+    } catch (error) {
+      console.log(`[Error]: ${error.message}`);
+    }
+  };
+
   return (
     <Router>
       <Nav user={user} handleLogout={handleLogout} />
@@ -63,7 +82,11 @@ function App() {
         </Route>
         <Route path="/dashboard">
           {user ? (
-            <Dashboard user={user} posts={posts} />
+            <Dashboard
+              user={user}
+              posts={posts}
+              createPost={handleCreatePost}
+            />
           ) : (
             <Redirect to="/login" />
           )}
