@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 function DashboardSide({ user }) {
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
 
   return (
     <ul className="d-flex flex-column list-unstyled text-light h-100 m-0">
@@ -20,11 +20,6 @@ function DashboardSide({ user }) {
         <li className="pl-1">
           <Link to={`${url}/create`}>Blog</Link>
         </li>
-      </ul>
-      <ul className="list-unstyled my-3 px-3">
-        <li className="text-secondary text-uppercase mb-1">Edit</li>
-        <li className="pl-1">Blog</li>
-        <li className="pl-1">Comment</li>
       </ul>
       <li className="bg-secondary text-light border-top border-light mt-auto px-3 py-2">
         <small>Logged in as:</small>

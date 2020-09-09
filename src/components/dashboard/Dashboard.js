@@ -27,7 +27,7 @@ function Dashboard({ user, posts, createPost }) {
             <Post posts={posts} />
           </Route>
           <Route exact path={`${path}/create`}>
-            <CreateBlog handleCreatePost={createPost} />
+            <CreateBlog createPost={createPost} />
           </Route>
         </Switch>
       </Col>
