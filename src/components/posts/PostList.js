@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
-import { Container, Table, Button } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
+import Prompt from './Prompt';
 
 function PostList({ posts, deletePost }) {
   const { url } = useRouteMatch();
@@ -34,15 +35,7 @@ function PostList({ posts, deletePost }) {
                 >
                   Edit
                 </Link>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => {
-                    deletePost(post._id);
-                  }}
-                >
-                  Delete
-                </Button>
+                <Prompt deletePost={() => deletePost(post._id)} />
               </td>
             </tr>
           ))}
