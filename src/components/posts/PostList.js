@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { Container, Table, Button } from 'react-bootstrap';
 
-function PostList({ posts, updatePost }) {
+function PostList({ posts, deletePost }) {
   const { url } = useRouteMatch();
   return (
     <Container>
@@ -34,7 +34,13 @@ function PostList({ posts, updatePost }) {
                 >
                   Edit
                 </Link>
-                <Button variant="danger" size="sm">
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => {
+                    deletePost(post._id);
+                  }}
+                >
                   Delete
                 </Button>
               </td>

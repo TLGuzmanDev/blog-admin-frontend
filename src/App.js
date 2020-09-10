@@ -88,6 +88,22 @@ function App() {
     }
   };
 
+  const handleDeletePost = async (postID) => {
+    const config = {
+      headers: {
+        Authorization: `bearer ${user.token}`,
+      },
+    };
+
+    try {
+      await axios.delete(`http://localhost:3001/api/posts/${postID}`, config);
+
+      setPosts(posts.filter((post) => post._id !== postID));
+    } catch (error) {
+      console.log(`[Error]: ${error.message}`);
+    }
+  };
+
   return (
     <Router>
       <Nav user={user} handleLogout={handleLogout} />
@@ -107,6 +123,7 @@ function App() {
               posts={posts}
               createPost={handleCreatePost}
               updatePost={handleUpdatePost}
+              deletePost={handleDeletePost}
             />
           ) : (
             <Redirect to="/login" />
