@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { Container, Table } from 'react-bootstrap';
 import Prompt from './Prompt';
+import moment from 'moment';
 
 function PostList({ posts, deletePost }) {
   const { url } = useRouteMatch();
@@ -27,7 +28,7 @@ function PostList({ posts, deletePost }) {
                 <Link to={`${url}/${post._id}`}>{post.title}</Link>
               </td>
               <td>{post.comments.length}</td>
-              <td>{`${post.createdAt}`}</td>
+              <td>{moment(post.createdAt).format('MMM DD YYYY')}</td>
               <td className="d-flex justify-content-center">
                 <Link
                   to={`${url}/edit/${post._id}`}
