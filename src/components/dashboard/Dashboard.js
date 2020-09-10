@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import DashboardSide from './DashboardSide';
 import DashboardMain from './DashboardMain';
-import CreateBlog from '../create/CreateBlog';
+import CreatePost from '../posts/CreatePost';
 import PostList from '../posts/PostList';
 import Post from '../posts/Post';
 
@@ -27,7 +27,7 @@ function Dashboard({ user, posts, createPost }) {
             <Post posts={posts} />
           </Route>
           <Route exact path={`${path}/create`}>
-            <CreateBlog createPost={createPost} />
+            <CreatePost createPost={createPost} />
           </Route>
         </Switch>
       </Col>
