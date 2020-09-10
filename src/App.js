@@ -61,8 +61,28 @@ function App() {
         post,
         config
       );
-      console.log(response.data);
       setPosts([response.data, ...posts]);
+    } catch (error) {
+      console.log(`[Error]: ${error.message}`);
+    }
+  };
+
+  const handleUpdatePost = async (postId, newPost) => {
+    const config = {
+      headers: {
+        Authorization: `bearer ${user.token}`,
+      },
+    };
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/posts/${postId}`,
+        newPost,
+        config
+      );
+      setPosts(
+        posts.map((post) => (post._id === postId ? response.data : post))
+      );
+      <Redirect to={`/dashboard/blogs/${postID}`} />;
     } catch (error) {
       console.log(`[Error]: ${error.message}`);
     }
@@ -86,6 +106,7 @@ function App() {
               user={user}
               posts={posts}
               createPost={handleCreatePost}
+              updatePost={handleUpdatePost}
             />
           ) : (
             <Redirect to="/login" />

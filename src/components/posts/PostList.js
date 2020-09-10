@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { Container, Table, Button } from 'react-bootstrap';
 
-function PostList({ posts }) {
+function PostList({ posts, updatePost }) {
   const { url } = useRouteMatch();
   return (
     <Container>
@@ -28,9 +28,12 @@ function PostList({ posts }) {
               <td>{post.comments.length}</td>
               <td>{`${post.createdAt}`}</td>
               <td className="d-flex justify-content-center">
-                <Button variant="primary" size="sm" className="mr-1">
+                <Link
+                  to={`${url}/edit/${post._id}`}
+                  className="btn btn-sm btn-primary mr-1"
+                >
                   Edit
-                </Button>
+                </Link>
                 <Button variant="danger" size="sm">
                   Delete
                 </Button>

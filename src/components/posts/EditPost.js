@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useParams } from 'react-router-dom';
 import { Container, Form, Tabs, Tab, Button } from 'react-bootstrap';
 
 import './create.css';
 
-function CreatePost({ createPost }) {
+function EditPost({ posts, updatePost }) {
+  const { postID } = useParams();
+  const post = posts.find((post) => post._id === postID);
+
+  if (!post) {
+    return <h2>Post not found</h2>;
+  }
+
   const [key, setKey] = useState('editor');
-  const [body, setBody] = useState('');
-  const [title, setTitle] = useState('');
+  const [body, setBody] = useState(post.body);
+  const [title, setTitle] = useState(post.title);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createPost({ title, body });
+    updatePost(postID, { title, body });
   };
 
   const handleReset = () => {
@@ -21,7 +29,7 @@ function CreatePost({ createPost }) {
 
   return (
     <Container fluid>
-      <h1 className="text-center">Create Blog Post</h1>
+      <h1 className="text-center">Edit Blog Post</h1>
       <hr />
       <Tabs
         id="controlled-tab"
@@ -68,7 +76,7 @@ function CreatePost({ createPost }) {
                   Reset
                 </Button>
                 <Button variant="primary" type="submit">
-                  Create
+                  Update
                 </Button>
               </div>
             </div>
@@ -88,4 +96,4 @@ function CreatePost({ createPost }) {
   );
 }
 
-export default CreatePost;
+export default EditPost;

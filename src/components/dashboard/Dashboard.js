@@ -7,8 +7,9 @@ import DashboardMain from './DashboardMain';
 import CreatePost from '../posts/CreatePost';
 import PostList from '../posts/PostList';
 import Post from '../posts/Post';
+import EditPost from '../posts/EditPost';
 
-function Dashboard({ user, posts, createPost }) {
+function Dashboard({ user, posts, createPost, updatePost }) {
   const { path } = useRouteMatch();
   return (
     <Row as="main" noGutters className="bg-secondary flex-grow-1">
@@ -21,7 +22,10 @@ function Dashboard({ user, posts, createPost }) {
             <DashboardMain user={user} />
           </Route>
           <Route exact path={`${path}/blogs`}>
-            <PostList posts={posts} />
+            <PostList posts={posts} updatePost={updatePost} />
+          </Route>
+          <Route path={`${path}/blogs/edit/:postID`}>
+            <EditPost posts={posts} updatePost={updatePost} />
           </Route>
           <Route path={`${path}/blogs/:postID`}>
             <Post posts={posts} />
