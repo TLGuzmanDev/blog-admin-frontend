@@ -104,6 +104,26 @@ function App() {
     }
   };
 
+  const handleToggleHidden = async (postID, newPost) => {
+    const config = {
+      headers: {
+        Authorization: `bearer ${user.token}`,
+      },
+    };
+    try {
+      const response = await axios.put(
+        `http://localhost:3001/api/posts/${postID}`,
+        newPost,
+        config
+      );
+      setPosts(
+        posts.map((post) => (post._id === postID ? response.data : post))
+      );
+    } catch (error) {
+      console.log(`[Error]: ${error.message}`);
+    }
+  };
+
   return (
     <Router>
       <Nav user={user} handleLogout={handleLogout} />
@@ -124,6 +144,7 @@ function App() {
               createPost={handleCreatePost}
               updatePost={handleUpdatePost}
               deletePost={handleDeletePost}
+              toggleHidden={handleToggleHidden}
             />
           ) : (
             <Redirect to="/login" />

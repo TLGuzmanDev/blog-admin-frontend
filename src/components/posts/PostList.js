@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
-import { Container, Table } from 'react-bootstrap';
+import { Container, Table, Button } from 'react-bootstrap';
 import Prompt from './Prompt';
 import moment from 'moment';
 
-function PostList({ posts, deletePost }) {
+function PostList({ posts, deletePost, toggleHidden }) {
   const { url } = useRouteMatch();
   return (
     <Container>
@@ -17,6 +17,7 @@ function PostList({ posts, deletePost }) {
             <th>Title</th>
             <th>Comments</th>
             <th>Date Created</th>
+            <th>Hidden</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -29,7 +30,23 @@ function PostList({ posts, deletePost }) {
               </td>
               <td>{post.comments.length}</td>
               <td>{moment(post.createdAt).format('MMM DD YYYY')}</td>
-              <td className="d-flex justify-content-center">
+              <td>{post.hidden ? 'Yes' : 'No'}</td>
+              <td>
+                <Button
+                  type="button"
+                  variant={post.hidden ? 'success' : 'warning'}
+                  size="sm"
+                  className="mr-1"
+                  onClick={() => {
+                    toggleHidden(post._id, {
+                      title: post.title,
+                      body: post.body,
+                      hidden: !post.hidden,
+                    });
+                  }}
+                >
+                  {post.hidden ? 'Show' : 'Hide'}
+                </Button>
                 <Link
                   to={`${url}/edit/${post._id}`}
                   className="btn btn-sm btn-primary mr-1"

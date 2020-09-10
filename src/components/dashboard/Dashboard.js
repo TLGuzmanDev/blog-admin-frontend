@@ -9,7 +9,14 @@ import PostList from '../posts/PostList';
 import Post from '../posts/Post';
 import EditPost from '../posts/EditPost';
 
-function Dashboard({ user, posts, createPost, updatePost, deletePost }) {
+function Dashboard({
+  user,
+  posts,
+  createPost,
+  updatePost,
+  deletePost,
+  toggleHidden,
+}) {
   const { path } = useRouteMatch();
   return (
     <Row as="main" noGutters className="bg-secondary flex-grow-1">
@@ -26,6 +33,7 @@ function Dashboard({ user, posts, createPost, updatePost, deletePost }) {
               posts={posts}
               updatePost={updatePost}
               deletePost={deletePost}
+              toggleHidden={toggleHidden}
             />
           </Route>
           <Route path={`${path}/blogs/edit/:postID`}>
