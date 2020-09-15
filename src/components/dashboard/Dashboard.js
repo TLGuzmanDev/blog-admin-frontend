@@ -7,6 +7,7 @@ import DashboardMain from './DashboardMain';
 import CreatePost from '../posts/CreatePost';
 import PostList from '../posts/PostList';
 import Post from '../posts/Post';
+import Comments from '../posts/Comments';
 import EditPost from '../posts/EditPost';
 
 function Dashboard({
@@ -39,8 +40,11 @@ function Dashboard({
           <Route path={`${path}/blogs/edit/:postID`}>
             <EditPost posts={posts} updatePost={updatePost} />
           </Route>
-          <Route path={`${path}/blogs/:postID`}>
+          <Route exact path={`${path}/blogs/:postID`}>
             <Post posts={posts} />
+          </Route>
+          <Route path={`${path}/blogs/:postID/comments`}>
+            <Comments posts={posts} />
           </Route>
           <Route exact path={`${path}/create`}>
             <CreatePost createPost={createPost} />

@@ -28,7 +28,11 @@ function PostList({ posts, deletePost, toggleHidden }) {
               <td>
                 <Link to={`${url}/${post._id}`}>{post.title}</Link>
               </td>
-              <td>{post.comments.length}</td>
+              <td>
+                <Link to={`${url}/${post._id}/comments`}>
+                  {post.comments.length}
+                </Link>
+              </td>
               <td>{moment(post.createdAt).format('MMM DD YYYY')}</td>
               <td>{post.hidden ? 'Yes' : 'No'}</td>
               <td>
