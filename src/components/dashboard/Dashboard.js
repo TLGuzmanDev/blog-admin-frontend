@@ -17,6 +17,7 @@ function Dashboard({
   updatePost,
   deletePost,
   toggleHidden,
+  deleteComment,
 }) {
   const { path } = useRouteMatch();
   return (
@@ -44,7 +45,7 @@ function Dashboard({
             <Post posts={posts} />
           </Route>
           <Route path={`${path}/blogs/:postID/comments`}>
-            <Comments posts={posts} />
+            <Comments posts={posts} deleteComment={deleteComment} />
           </Route>
           <Route exact path={`${path}/create`}>
             <CreatePost createPost={createPost} />

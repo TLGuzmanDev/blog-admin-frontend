@@ -124,6 +124,26 @@ function App() {
     }
   };
 
+  const handleDeleteComment = async (postID, commentID) => {
+    const config = {
+      headers: {
+        Authorization: `bearer ${user.token}`,
+      },
+    };
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/posts/${postID}/comments/${commentID}`,
+        config
+      );
+
+      setPosts(
+        posts.map((post) => (post._id === postID ? response.data : post))
+      );
+    } catch (error) {
+      console.log(`[Error]: ${error.message}`);
+    }
+  };
+
   return (
     <Router>
       <Nav user={user} handleLogout={handleLogout} />
@@ -145,6 +165,7 @@ function App() {
               updatePost={handleUpdatePost}
               deletePost={handleDeletePost}
               toggleHidden={handleToggleHidden}
+              deleteComment={handleDeleteComment}
             />
           ) : (
             <Redirect to="/login" />

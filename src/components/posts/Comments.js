@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Table, Button } from 'react-bootstrap';
 
-function Comments({ posts }) {
+function Comments({ posts, deleteComment }) {
   const { postID } = useParams();
   const post = posts.find((post) => post._id === postID);
 
@@ -25,12 +25,17 @@ function Comments({ posts }) {
         </thead>
         <tbody>
           {post.comments.map((comment, index) => (
-            <tr>
+            <tr key={comment._id}>
               <td>{index}</td>
               <td>{comment.author}</td>
               <td>{comment.body}</td>
               <td>
-                <Button type="button" variant="danger" size="sm">
+                <Button
+                  type="button"
+                  variant="danger"
+                  size="sm"
+                  onClick={() => deleteComment(postID, comment._id)}
+                >
                   Delete
                 </Button>
               </td>
