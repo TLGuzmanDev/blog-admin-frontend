@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-function Prompt({ deletePost }) {
+function Prompt({ deleteAction, targetTitle }) {
   const [show, setShow] = useState(false);
 
   const handleDelete = () => {
-    deletePost();
+    deleteAction();
     setShow(false);
   };
 
@@ -19,7 +19,7 @@ function Prompt({ deletePost }) {
           <Modal.Title className="text-center">Are you sure?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Do you really want to delete this post? This action cannot be undone.
+          {`Do you really want to delete this ${targetTitle}? This action cannot be undone.`}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShow(false)}>

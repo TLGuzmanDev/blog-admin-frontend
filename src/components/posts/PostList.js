@@ -57,7 +57,10 @@ function PostList({ posts, deletePost, toggleHidden }) {
                 >
                   Edit
                 </Link>
-                <Prompt deletePost={() => deletePost(post._id)} />
+                <Prompt
+                  deleteAction={() => deletePost(post._id)}
+                  targetTitle={'post'}
+                />
               </td>
             </tr>
           ))}
