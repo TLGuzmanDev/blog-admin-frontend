@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Table, Button } from 'react-bootstrap';
 
+import Prompt from './Prompt';
+
 function Comments({ posts, deleteComment }) {
   const { postID } = useParams();
   const post = posts.find((post) => post._id === postID);
@@ -30,14 +32,10 @@ function Comments({ posts, deleteComment }) {
               <td>{comment.author}</td>
               <td>{comment.body}</td>
               <td>
-                <Button
-                  type="button"
-                  variant="danger"
-                  size="sm"
-                  onClick={() => deleteComment(postID, comment._id)}
-                >
-                  Delete
-                </Button>
+                <Prompt
+                  deleteAction={() => deleteComment(postID, comment._id)}
+                  targetTitle={'comment'}
+                />
               </td>
             </tr>
           ))}
